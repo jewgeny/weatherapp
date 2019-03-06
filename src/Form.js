@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Messages from "./Messages";
 
 class Form extends Component{
   render(){
@@ -11,6 +12,7 @@ class Form extends Component{
                              <button className="btn btn-primary" type="submit">Search</button>
                           </div>
                        </div>
+                         <Messages doubleText={this.props.doubleText} />
                     </form>
 
         </>

@@ -7,10 +7,10 @@ class NavList extends React.Component{
       return(
         <ul className="nav">
           <li className="nav-item">
-            <NavLink activeStyle={{textDecoration: 'underline'}} className="nav-link text-primary" to="/">Search</NavLink>
+            <NavLink activeStyle={{ textDecoration: 'underline' }}  className="nav-link text-primary" exact to="/">Search</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeStyle={{ textDecoration: 'underline' }} className="text-primary nav-link" to="/showweather">Show Weather</NavLink>
+            <NavLink activeStyle={{ textDecoration: 'underline' }}  className="text-primary nav-link" to="/showweather">Show Weather</NavLink>
           </li>
         </ul>
       )
