@@ -46,7 +46,7 @@ class App extends Component {
           })
         }
 
-        setTimeout(() => this.setState({formsubmitted: false}), 0)
+         setTimeout(() => this.setState({formsubmitted: false}), 0)
      })
 
   }
