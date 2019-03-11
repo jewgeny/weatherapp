@@ -8,11 +8,11 @@ class ShowWeather extends React.Component{
                     {this.props.cities.map((city, index) => {
                       return(
 
-                            <div key={index} className="card mr-3 my-1 col-xs-12 col-sm-3 col-lg-3 border border-secondary py-2">
-                                   <h3 className="">{city.city}</h3>
+                            <div key={index} className="test card mr-3 my-1 col-xs-12 col-sm-3 col-lg-3 border border-secondary py-2">
+                                   <h3 index={index} className="cityTitle">{city.city}</h3>
                                    <img style={{width: "60%", height: "60%"}} className="weatherApp" src={city.img} />
                                    <span className="display-4">{city.temp + "°"}</span>
-                                   {/*<button type="button" onClick={this.props.deleteCity} className="btn btn-warning my-3 py-3"><strong>Delete City</strong></button>*/}
+                                   <span ident={index} onClick={this.props.deleteCity} className="deleteButton">&times;</span>
                               </div>
                        )
                      }

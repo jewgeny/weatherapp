@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import NavList from "./Navlist";
 import {Route, BrowserRouter, Redirect, Switch} from "react-router-dom";
@@ -12,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-     cityName: "", cityNameArray: [], cities: [], formsubmitted: false, doubleText: false
+     cityName: "", cities: [], formsubmitted: false, doubleText: false
     }
   }
 
@@ -25,26 +24,27 @@ class App extends Component {
        console.log(res);
        console.log(res.data);
 
-       let temtCityArray = [...this.state.cityNameArray];
-       temtCityArray.push(this.state.cityName);
-
-       let objects = {city: res.data.name,
+       let objects = {city: res.data.name.toUpperCase(),
                       img: `http://openweathermap.org/img/w/${res.data.weather[0].icon}.png`,
                       temp: Math.round(res.data.main.temp - 273)};
 
-        if(this.state.cityNameArray.includes(this.state.cityName)){
-           this.setState({doubleText: true})
-        }
+      let tempCityArray = [...this.state.cities, objects];
+      const findCity = this.state.cities.find(city => city.city === this.state.cityName);
 
-        else{
-           this.setState({
-              cities: [...this.state.cities, objects],
-              cityName: "",
-              formsubmitted: true,
-              doubleText: false,
-              cityNameArray: temtCityArray
-          })
-        }
+      if(findCity){
+        this.setState({doubleText: true})
+      }
+
+      else{
+                this.setState({
+                cities: tempCityArray,
+                cityName: "",
+                formsubmitted: true,
+                doubleText: false,
+            })
+          }
+
+
 
          setTimeout(() => this.setState({formsubmitted: false}), 0)
      })
@@ -52,10 +52,22 @@ class App extends Component {
   }
 
   updateValue(event){
-
     this.setState({
       cityName: event.target.value.toUpperCase()
     })
+  }
+
+  deleteCity(event){
+     const buttonIndex = event.target.getAttribute("ident");
+     console.log(buttonIndex);
+     const copyOfCities = Object.assign([], this.state.cities);
+     copyOfCities.splice(buttonIndex, 1);
+
+     this.setState({
+       cities: copyOfCities,
+       doubleText: false
+
+     })
   }
 
 
@@ -64,13 +76,13 @@ class App extends Component {
     return (
     <BrowserRouter>
      <>
-        <h1 className="display-3 text-center my-5">Weather App</h1>
+        <h1 className="logo display-3 text-center my-5">Weather App</h1>
         <div className="container my-5">
           <div className="jumbotron">
               <NavList />
               <Route exact path="/" render={() => <Form getCity={this.getCity.bind(this)} doubleText={this.state.doubleText} updateValue={this.updateValue.bind(this)} />} />
               <Switch>
-                  <Route path="/showweather" render={() => <ShowWeather doubleText={this.state.doubleText} cities={this.state.cities} />} />
+                  <Route path="/showweather" render={() => <ShowWeather index={this.props.cities} deleteCity={this.deleteCity.bind(this)} doubleText={this.state.doubleText} cities={this.state.cities} />} />
                   {this.state.formsubmitted && <Redirect to="/showweather" />}
              </Switch>
           </div>
