@@ -78,7 +78,7 @@ class App extends Component {
      <>
         <h1 className="logo display-3 text-center my-5">Weather App</h1>
         <div className="container my-5">
-          <div className="jumbotron">
+          <div className="jumbotron opac">
               <NavList />
               <Route exact path="/" render={() => <Form getCity={this.getCity.bind(this)} doubleText={this.state.doubleText} updateValue={this.updateValue.bind(this)} />} />
               <Switch>
