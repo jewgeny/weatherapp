@@ -74,7 +74,7 @@ class App extends Component {
     return (
     <BrowserRouter>
      <>
-        <h1 className="logo display-3 text-center my-5">Weather App</h1>
+        <h1 className="logo display-3 text-center my-5">Weather - App</h1>
         <div className="container my-5">
           <div className="jumbotron opac">
               <NavList />
